@@ -18,7 +18,7 @@ func registerCommonAuthenticationServerProtocols() {
 	port, _ := strconv.Atoi(os.Getenv("PN_MINECRAFT_SECURE_SERVER_PORT"))
 
 	secureStationURL := types.NewStationURL("")
-	secureStationURL.SetURLType(constants.StationURLPRUDP)
+	secureStationURL.SetURLType(constants.StationURLPRUDPS)
 	secureStationURL.SetAddress(os.Getenv("PN_MINECRAFT_SECURE_SERVER_HOST"))
 	secureStationURL.SetPortNumber(uint16(port))
 	secureStationURL.SetConnectionID(1)
@@ -28,26 +28,6 @@ func registerCommonAuthenticationServerProtocols() {
 	secureStationURL.SetType(uint8(constants.StationURLFlagPublic))
 
 	commonTicketGrantingProtocol.SecureStationURL = secureStationURL
-	// todo this build string is wrong
-	commonTicketGrantingProtocol.BuildName = types.NewString("branch:origin/project/ctr-egd build:3_10_22_2008_0")
-	// server account?
-
-	//ticketGrantingProtocol := ticket_granting.NewCommonTicketGrantingProtocol(globals.AuthenticationServer)
-	//
-	//port, _ := strconv.Atoi(os.Getenv("PN_MINECRAFT_SECURE_SERVER_PORT"))
-	//
-	//secureStationURL := nex.NewStationURL("")
-	//secureStationURL.SetScheme("prudps")
-	//secureStationURL.SetAddress(os.Getenv("PN_MINECRAFT_SECURE_SERVER_HOST"))
-	//secureStationURL.SetPort(uint32(port))
-	//secureStationURL.SetCID(1)
-	//secureStationURL.SetPID(2)
-	//secureStationURL.SetSID(1)
-	//secureStationURL.SetStream(10)
-	//secureStationURL.SetType(2)
-	//
-	//ticketGrantingProtocol.SetSecureStationURL(secureStationURL)
-	////ticketGrantingProtocol.SetBuildName("branch:origin/project/ctr-egd build:3_10_22_2008_0")
-	//
-	//globals.AuthenticationServer.SetPasswordFromPIDFunction(globals.PasswordFromPID)
+	commonTicketGrantingProtocol.BuildName = types.NewString("branch:origin/release/ngs/3.10.x.200x build:3_10_22_2006_0")
+	commonTicketGrantingProtocol.SecureServerAccount = globals.SecureServerAccount
 }

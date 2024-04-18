@@ -9,24 +9,18 @@ import (
 	nex "github.com/PretendoNetwork/nex-go/v2"
 )
 
-var serverBuildString string
-
 func StartAuthenticationServer() {
 	globals.AuthenticationServer = nex.NewPRUDPServer()
+	globals.AuthenticationServer.ByteStreamSettings.UseStructureHeader = true
 
 	globals.AuthenticationEndpoint = nex.NewPRUDPEndPoint(1)
-	// todo: server account..?
-	// NEED AccountDetailsByUsername
+	globals.AuthenticationEndpoint.ServerAccount = globals.AuthenticationServerAccount
+	globals.AuthenticationEndpoint.AccountDetailsByPID = globals.AccountDetailsByPID
+	globals.AuthenticationEndpoint.AccountDetailsByUsername = globals.AccountDetailsByUsername
 	globals.AuthenticationServer.BindPRUDPEndPoint(globals.AuthenticationEndpoint)
 
 	globals.AuthenticationServer.LibraryVersions.SetDefault(nex.NewLibraryVersion(3, 10, 0))
 	globals.AuthenticationServer.AccessKey = "f1b61c8e"
-
-	//globals.AuthenticationServer.SetPRUDPVersion(1)
-	//globals.AuthenticationServer.SetPRUDPProtocolMinorVersion(2)
-	//globals.AuthenticationServer.SetDefaultNEXVersion(nex.NewNEXVersion(3, 10, 0))
-	//globals.AuthenticationServer.SetKerberosPassword(globals.KerberosPassword)
-	//globals.AuthenticationServer.SetAccessKey("f1b61c8e")
 
 	globals.AuthenticationEndpoint.OnData(func(packet nex.PacketInterface) {
 		request := packet.RMCMessage()

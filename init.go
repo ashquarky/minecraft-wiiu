@@ -46,6 +46,8 @@ func init() {
 		globals.KerberosPassword = kerberosPassword
 	}
 
+	globals.InitAccounts()
+
 	if strings.TrimSpace(authenticationServerPort) == "" {
 		globals.Logger.Error("PN_MINECRAFT_AUTHENTICATION_SERVER_PORT environment variable not set")
 		os.Exit(0)
