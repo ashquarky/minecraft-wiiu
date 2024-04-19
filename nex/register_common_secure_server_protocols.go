@@ -26,8 +26,7 @@ func cleanupSearchMatchmakeSessionHandler(matchmakeSession *matchmakingtypes.Mat
 	globals.Logger.Info(matchmakeSession.String())
 }
 
-func CreateReportDBRecord(_ *types.PID, _ *types.PrimitiveU32, reportData *types.QBuffer) error {
-	globals.Logger.Info(reportData.String())
+func CreateReportDBRecord(_ *types.PID, _ *types.PrimitiveU32, _ *types.QBuffer) error {
 	return nil
 }
 
