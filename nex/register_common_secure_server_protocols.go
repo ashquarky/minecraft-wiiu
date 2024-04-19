@@ -18,6 +18,7 @@ import (
 	matchmakingtypes "github.com/PretendoNetwork/nex-protocols-go/v2/match-making/types"
 )
 
+// Is this needed? -Ash
 func cleanupSearchMatchmakeSessionHandler(matchmakeSession *matchmakingtypes.MatchmakeSession) {
 	//_ = matchmakeSession.Attributes.SetIndex(2, types.NewPrimitiveU32(0))
 	matchmakeSession.MatchmakeParam = matchmakingtypes.NewMatchmakeParam()
@@ -25,7 +26,8 @@ func cleanupSearchMatchmakeSessionHandler(matchmakeSession *matchmakingtypes.Mat
 	globals.Logger.Info(matchmakeSession.String())
 }
 
-func CreateReportDBRecord(_ *types.PID, _ *types.PrimitiveU32, _ *types.QBuffer) error {
+func CreateReportDBRecord(_ *types.PID, _ *types.PrimitiveU32, reportData *types.QBuffer) error {
+	globals.Logger.Info(reportData.String())
 	return nil
 }
 
@@ -52,6 +54,5 @@ func registerCommonSecureServerProtocols() {
 	globals.SecureEndpoint.RegisterServiceProtocol(matchmakeExtensionProtocol)
 	commonMatchmakeExtensionProtocol := commonmatchmakeextension.NewCommonProtocol(matchmakeExtensionProtocol)
 
-	//commonMatchmakeExtensionProtocol.OnAfterCreateMatchmakeSessionWithParam
 	commonMatchmakeExtensionProtocol.CleanupSearchMatchmakeSession = cleanupSearchMatchmakeSessionHandler
 }

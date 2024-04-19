@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/PretendoNetwork/minecraft-wiiu/globals"
-	nex "github.com/PretendoNetwork/nex-go/v2"
+	"github.com/PretendoNetwork/nex-go/v2"
 )
 
 func StartAuthenticationServer() {
@@ -29,6 +29,10 @@ func StartAuthenticationServer() {
 		fmt.Printf("Protocol ID: %#v\n", request.ProtocolID)
 		fmt.Printf("Method ID: %#v\n", request.MethodID)
 		fmt.Println("===============")
+	})
+
+	globals.AuthenticationEndpoint.OnError(func(err *nex.Error) {
+		globals.Logger.Errorf("Auth: %v", err)
 	})
 
 	registerCommonAuthenticationServerProtocols()

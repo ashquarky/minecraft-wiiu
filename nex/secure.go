@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/PretendoNetwork/minecraft-wiiu/globals"
-	nex "github.com/PretendoNetwork/nex-go/v2"
+	"github.com/PretendoNetwork/nex-go/v2"
 )
 
 func StartSecureServer() {
@@ -35,11 +35,10 @@ func StartSecureServer() {
 	})
 
 	globals.SecureEndpoint.OnError(func(err *nex.Error) {
-		globals.Logger.Errorf("secure server error: %v", err)
+		globals.Logger.Errorf("Secure: %v", err)
 	})
 
 	registerCommonSecureServerProtocols()
-	//registerSecureServerNEXProtocols()
 
 	port, _ := strconv.Atoi(os.Getenv("PN_MINECRAFT_SECURE_SERVER_PORT"))
 
